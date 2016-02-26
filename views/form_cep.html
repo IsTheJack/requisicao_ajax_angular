@@ -1,0 +1,50 @@
+<!-- {{alert.mensagem}} é uma angular expression que indica que esse valor mudará de acordo com a variável dentro do $scope do controller responsável -->
+<alerta tipo="{{alert.tipo}}" mensagem="{{alert.mensagem}}" ng-show="alert.tipo"></alerta> 
+
+<!-- Erros de Validação -->
+.<div class="alert alert-warning" ng-show="formulario.$submitted && formulario.$invalid">
+    <ul>
+        <li ng-show="formulario.cep.$error.required">Preencha o CEP antes de clicar em enviar</li>
+        <li ng-show="formulario.cep.$error.maxlength">O CEP tem no máximo 8 números</li>
+        <li ng-show="formulario.cep.$error.pattern">O CEP aceita somente números</li>
+    </ul>
+</div>
+
+<div class="row">
+    <form novalidate class="col-md-8 col-md-offset-2" name="formulario" ng-submit="buscarEndereco(cep)">
+        <div class="form-group">
+            <label for="cep">CEP:</label>
+            <input class="form-control" type="text" name="cep" ng-model="cep" required maxlength="8" pattern="[0-9]{8}">
+        </div>
+        <button class="btn btn-lg btn-primary">Enviar</button>
+    </form>
+</div>
+
+<div class="row"><h2 class="text-center">{{tituloTabela || cep}}</h2></div>
+
+<div class="row" ng-show="retorno.status">
+    <div class="col-md-8 col-md-offset-2">
+        <table class="table table-striped table-hover">
+            <tr>
+                <td>CEP:</td>
+                <td>{{retorno.code}}</td>
+            </tr>
+            <tr>
+                <td>Estado:</td>
+                <td>{{retorno.state}}</td>
+            </tr>
+            <tr>
+                <td>Cidade:</td>
+                <td>{{retorno.city}}</td>
+            </tr>
+            <tr>
+                <td>Bairro:</td>
+                <td>{{retorno.district}}</td>
+            </tr>
+            <tr>
+                <td>Rua:</td>
+                <td>{{retorno.address}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
